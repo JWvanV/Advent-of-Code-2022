@@ -7,30 +7,30 @@ Language: Kotlin
 <details>
   <summary>Day 1</summary>
 
-| Total  | 47.508978ms |
+| Total  | 44.266059ms |
 |--------|------------:|
-| Part 1 | 44.954740ms |
-| Part 2 |  2.554238ms |
+| Part 1 | 42.012517ms |
+| Part 2 |  2.253542ms |
 
 </details>
 
 <details>
   <summary>Day 2</summary>
 
-| Total  | 10.160537ms |
-|--------|------------:|
-| Part 1 |  6.247713ms |
-| Part 2 |  3.912824ms |
+| Total  | 9.234349ms |
+|--------|-----------:|
+| Part 1 | 5.747695ms |
+| Part 2 | 3.486654ms |
 
 </details>
 
 <details>
-  <summary>Day 2</summary>
+  <summary>Day 3</summary>
 
-| Total  | 26.178963ms |
+| Total  | 23.975251ms |
 |--------|------------:|
-| Part 1 | 16.802067ms |
-| Part 2 |  9.376896ms |
+| Part 1 | 15.607004ms |
+| Part 2 |  8.368247ms |
 
 </details>
 
