@@ -1,14 +1,15 @@
 package day1
 
+import common.Input
 import common.Puzzle
 import day1.model.Elf
 import day1.model.FoodItem
 
 fun main() {
-    puzzle.solve(71780, 212489)
+    puzzle.solve()
 }
 
-val puzzle = object : Puzzle(1, "input") {
+val puzzle = object : Puzzle(1, Input.ASSIGNMENT) {
     override fun part1(): Any {
         val elfCalories = getElfs().map { it.totalFoodCalories() }
         return elfCalories.max()

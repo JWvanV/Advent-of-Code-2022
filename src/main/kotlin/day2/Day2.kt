@@ -1,5 +1,6 @@
 package day2
 
+import common.Input
 import common.Puzzle
 import day2.model.Move
 import day2.model.Outcome
@@ -7,10 +8,10 @@ import day2.model.Round1
 import day2.model.Round2
 
 fun main() {
-    puzzle.solve(12586, 13193)
+    puzzle.solve()
 }
 
-val puzzle = object : Puzzle(2, "input") {
+val puzzle = object : Puzzle(2, Input.ASSIGNMENT) {
     override fun part1(): Any {
         val rounds = puzzleInput.mapEach {
             val chars = it.toCharArray()

@@ -18,5 +18,10 @@ class Input(private val filePath: String) {
             forEach(line)
         }
     }
+
+    companion object {
+        const val EXAMPLE = "example"
+        const val ASSIGNMENT = "assignment"
+    }
 }
 
