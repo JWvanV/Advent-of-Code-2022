@@ -11,11 +11,12 @@ class SolutionTests {
 
     @BeforeTest
     fun setup() {
+        // Set to true if you want to get the durations for each puzzle
         loggingEnabled = false
     }
 
     @AfterTest
-    fun breakdown() {
+    fun teardown() {
         loggingEnabled = loggingWasEnabled
     }
 
@@ -24,6 +25,12 @@ class SolutionTests {
 
     @Test
     fun `Day 2`() = assertPuzzleSolutions(day2.puzzle, 12586, 13193)
+
+    @Test
+    fun `Day 3`() = assertPuzzleSolutions(day3.puzzle, 7889, 2825)
+
+    @Test
+    fun `Day 4`() = assertPuzzleSolutions(day4.puzzle, Unit, Unit)
 
     private fun assertPuzzleSolutions(puzzle: Puzzle, solution1: Any, solution2: Any) {
         with(puzzle.solve()) {
