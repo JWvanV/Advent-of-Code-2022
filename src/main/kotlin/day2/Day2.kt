@@ -7,7 +7,7 @@ import day2.model.Round1
 import day2.model.Round2
 
 fun main() {
-    puzzle.solve()
+    puzzle.solve(12586, 13193)
 }
 
 val puzzle = object : Puzzle(2, "input") {

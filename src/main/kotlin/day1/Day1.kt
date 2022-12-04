@@ -5,7 +5,7 @@ import day1.model.Elf
 import day1.model.FoodItem
 
 fun main() {
-    puzzle.solve()
+    puzzle.solve(71780, 212489)
 }
 
 val puzzle = object : Puzzle(1, "input") {
