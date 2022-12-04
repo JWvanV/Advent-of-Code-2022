@@ -7,7 +7,7 @@ class Input(private val filePath: String) {
         forEachLine(forEach)
     }
 
-    fun <R> map(map: (line: String) -> R): List<R> = mutableListOf<R>().apply {
+    fun <R> mapEach(map: (line: String) -> R): List<R> = mutableListOf<R>().apply {
         forEachLine { line ->
             add(map(line))
         }

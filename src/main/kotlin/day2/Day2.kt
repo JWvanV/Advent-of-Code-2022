@@ -12,7 +12,7 @@ fun main() {
 
 val puzzle = object : Puzzle(2, "input") {
     override fun part1(): Any {
-        val rounds = puzzleInput.map {
+        val rounds = puzzleInput.mapEach {
             val chars = it.toCharArray()
             Round1(
                 opponentMove = Move.fromChar(chars[0]),
@@ -24,7 +24,7 @@ val puzzle = object : Puzzle(2, "input") {
     }
 
     override fun part2(): Any {
-        val rounds = puzzleInput.map {
+        val rounds = puzzleInput.mapEach {
             val chars = it.toCharArray()
             Round2(
                 opponentMove = Move.fromChar(chars[0]),

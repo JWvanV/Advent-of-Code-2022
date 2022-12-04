@@ -20,7 +20,7 @@ val puzzle = object : Puzzle(1, "input") {
     }
 
     private fun getElfs(): List<Elf> {
-        val snacks = puzzleInput.map { input ->
+        val snacks = puzzleInput.mapEach { input ->
             if (input.isBlank())
                 null
             else
