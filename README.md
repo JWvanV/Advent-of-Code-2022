@@ -1,6 +1,8 @@
 # Advent-of-Code-2022
 
-# Execution durations
+Language: Kotlin
+
+## Execution durations
 
 <details>
   <summary>Day 1</summary>
