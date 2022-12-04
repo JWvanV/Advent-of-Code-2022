@@ -34,4 +34,14 @@ Language: Kotlin
 
 </details>
 
+<details>
+  <summary>Day 4</summary>
+
+| Total  | 16.487495ms |
+|--------|------------:|
+| Part 1 | 12.622006ms |
+| Part 2 |  3.865489ms |
+
+</details>
+
 
