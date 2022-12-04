@@ -39,14 +39,23 @@ class SolutionTests {
         with(puzzle.solve()) {
             assertThat(part1.value).isEqualTo(solution1)
             assertThat(part2.value).isEqualTo(solution2)
-            printDurationMdTable(this)
+            printDurationSection(this)
         }
     }
 
-    private fun printDurationMdTable(solution: Puzzle.PuzzleSolution) {
-        println("| Total  | ${solution.totalDuration} |")
-        println("|--------|------------:|")
-        println("| Part 1 | ${solution.part1.duration} |")
-        println("| Part 2 | ${solution.part2.duration} |")
+    private fun printDurationSection(solution: Puzzle.PuzzleSolution) {
+        println(
+            """
+            <details>
+              <summary>Day ${solution.day}</summary>
+
+            | Total  | ${solution.totalDuration} |
+            |--------|------------:|
+            | Part 1 | ${solution.part1.duration} |
+            | Part 2 | ${solution.part2.duration} |
+
+            </details>
+        """.trimIndent()
+        )
     }
 }
