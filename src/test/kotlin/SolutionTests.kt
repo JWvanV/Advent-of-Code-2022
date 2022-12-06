@@ -36,7 +36,10 @@ class SolutionTests {
     fun `Day 5`() = assertPuzzleSolutions(day5.puzzle, "WCZTHTMPS", "BLSGJSDTS")
 
     @Test
-    fun `Day 6`() = assertPuzzleSolutions(day6.puzzle, Unit, Unit)
+    fun `Day 6`() = assertPuzzleSolutions(day6.puzzle, 1855, 3256)
+
+    @Test
+    fun `Day 7`() = assertPuzzleSolutions(day7.puzzle, Unit, Unit)
 
     private fun assertPuzzleSolutions(puzzle: Puzzle, solution1: Any, solution2: Any) {
         with(puzzle.solve()) {
