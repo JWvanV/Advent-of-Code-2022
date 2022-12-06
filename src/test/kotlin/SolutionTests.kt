@@ -50,6 +50,6 @@ class SolutionTests {
     }
 
     private fun printDurationSection(solution: Puzzle.PuzzleSolution) {
-        println("| Day ${solution.day} | ${solution.totalDuration} | ${solution.part1.duration} | ${solution.part2.duration} |")
+        println("| ${solution.day} | ${solution.totalDuration} | ${solution.part1.duration} | ${solution.part2.duration} |")
     }
 }
