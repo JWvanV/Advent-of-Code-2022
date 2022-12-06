@@ -47,18 +47,6 @@ class SolutionTests {
     }
 
     private fun printDurationSection(solution: Puzzle.PuzzleSolution) {
-        println(
-            """
-            <details>
-              <summary>Day ${solution.day}</summary>
-
-            | Total  | ${solution.totalDuration} |
-            |--------|------------:|
-            | Part 1 | ${solution.part1.duration} |
-            | Part 2 | ${solution.part2.duration} |
-
-            </details>
-        """.trimIndent()
-        )
+        println("| Day ${solution.day} | ${solution.totalDuration} | ${solution.part1.duration} | ${solution.part2.duration} |")
     }
 }
