@@ -4,6 +4,8 @@ import common.util.loggingEnabled
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
 
 class SolutionTests {
 
@@ -51,5 +53,8 @@ class SolutionTests {
 
     private fun printDurationSection(solution: Puzzle.PuzzleSolution) {
         println("| ${solution.day} | ${solution.totalDuration} | ${solution.part1.parseDuration} | ${solution.part1.computeDuration} | ${solution.part2.parseDuration} | ${solution.part2.computeDuration} |")
+//        println("| ${solution.day} | ${solution.totalDuration.ms()} | ${solution.part1.parseDuration.ms()} | ${solution.part1.computeDuration.ms()} | ${solution.part2.parseDuration.ms()} | ${solution.part2.computeDuration.ms()} |")
     }
+
+    private fun Duration.ms() = this.toString(DurationUnit.MILLISECONDS, decimals = 2)
 }
