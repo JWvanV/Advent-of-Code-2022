@@ -1,6 +1,5 @@
 package day3
 
-import common.Input
 import common.Puzzle
 
 fun main() {
@@ -9,12 +8,12 @@ fun main() {
 
 val puzzle = object : Puzzle<List<String>, List<String>>(3, Input.ASSIGNMENT) {
 
-    override fun parse1() = puzzleInput.lines
+    override fun parse1(lines: List<String>) = lines
 
     override fun compute1(data: List<String>): Any {
         val backpackPriorities = data.map { line ->
-            val compartment1 = line.dropLast(line.length / 2).toCharArray()
-            val compartment2 = line.drop(line.length / 2).toCharArray()
+            val compartment1 = line.dropLast(line.length / 2)
+            val compartment2 = line.drop(line.length / 2)
 
             val compartment1Items = compartment1.toHashSet()
             val compartment2Items = compartment2.toHashSet()
@@ -25,7 +24,7 @@ val puzzle = object : Puzzle<List<String>, List<String>>(3, Input.ASSIGNMENT) {
         return backpackPriorities.sum()
     }
 
-    override fun parse2() = puzzleInput.lines
+    override fun parse2(lines: List<String>) = lines
 
     override fun compute2(data: List<String>): Any {
         val groupItemChars = mutableListOf<Char>()
@@ -34,7 +33,7 @@ val puzzle = object : Puzzle<List<String>, List<String>>(3, Input.ASSIGNMENT) {
         var itemChars2 = emptySet<Char>()
 
         data.forEach { line ->
-            val itemChars = line.toCharArray().toSortedSet()
+            val itemChars = line.toSortedSet()
 
             when (currentMember) {
                 0 -> itemChars1 = itemChars

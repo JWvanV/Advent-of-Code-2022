@@ -1,6 +1,5 @@
 package day6
 
-import common.Input
 import common.Puzzle
 import kotlin.math.max
 
@@ -10,11 +9,11 @@ fun main() {
 
 val puzzle = object : Puzzle<List<String>, List<String>>(6, Input.ASSIGNMENT) {
 
-    override fun parse1() = puzzleInput.lines
+    override fun parse1(lines: List<String>) = lines
 
     override fun compute1(data: List<String>) = getEndIndexesOfFirstNonRepeatingCharWindow(data, 4).first()
 
-    override fun parse2() = puzzleInput.lines
+    override fun parse2(lines: List<String>) = lines
 
     override fun compute2(data: List<String>) = getEndIndexesOfFirstNonRepeatingCharWindow(data, 14).first()
 

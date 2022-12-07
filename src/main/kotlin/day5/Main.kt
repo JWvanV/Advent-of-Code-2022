@@ -1,6 +1,5 @@
 package day5
 
-import common.Input
 import common.Puzzle
 
 typealias CrateStack = ArrayDeque<Char>
@@ -12,7 +11,7 @@ fun main() {
 val puzzle = object :
     Puzzle<Pair<List<CrateStack>, List<IntArray>>, Pair<List<CrateStack>, List<IntArray>>>(5, Input.ASSIGNMENT) {
 
-    override fun parse1() = getStacksAndMoves()
+    override fun parse1(lines: List<String>) = getStacksAndMoves(lines)
 
     override fun compute1(data: Pair<List<CrateStack>, List<IntArray>>): Any {
         val (crateStacks, moves) = data
@@ -27,7 +26,7 @@ val puzzle = object :
         return crateStacks.map { it.last() }.joinToString(separator = "")
     }
 
-    override fun parse2() = getStacksAndMoves()
+    override fun parse2(lines: List<String>) = getStacksAndMoves(lines)
 
     override fun compute2(data: Pair<List<CrateStack>, List<IntArray>>): Any {
         val (crateStacks, moves) = data
@@ -45,12 +44,12 @@ val puzzle = object :
         return crateStacks.map { it.last() }.joinToString(separator = "")
     }
 
-    private fun getStacksAndMoves(): Pair<List<CrateStack>, List<IntArray>> {
+    private fun getStacksAndMoves(lines: List<String>): Pair<List<CrateStack>, List<IntArray>> {
         var numStacks = 0
         val crateLines = mutableListOf<String>()
         val moveLines = mutableListOf<IntArray>()
 
-        puzzleInput.forEach { line ->
+        lines.forEach { line ->
             when {
                 line.isBlank() ->
                     Unit

@@ -1,6 +1,5 @@
 package day7
 
-import common.Input
 import common.Puzzle
 import day7.model.FileSystem
 import day7.model.Node
@@ -12,12 +11,12 @@ fun main() {
 
 val puzzle = object : Puzzle<FileSystem, FileSystem>(7, Input.ASSIGNMENT) {
 
-    override fun parse1() = getFileSystem()
+    override fun parse1(lines: List<String>) = getFileSystem(lines)
 
     override fun compute1(data: FileSystem) =
         data.getDirectories().filter { it.getSize() < BigInteger.valueOf(100000) }.sumOf { it.getSize() }.toInt()
 
-    override fun parse2() = getFileSystem()
+    override fun parse2(lines: List<String>) = getFileSystem(lines)
 
     override fun compute2(data: FileSystem): Any {
         val totalUsedSpace = data.getRootDirectory().getSize()
@@ -27,12 +26,12 @@ val puzzle = object : Puzzle<FileSystem, FileSystem>(7, Input.ASSIGNMENT) {
             .toInt()
     }
 
-    private fun getFileSystem(): FileSystem {
+    private fun getFileSystem(lines: List<String>): FileSystem {
         val fileSystem = FileSystem()
 
         var currentDirectory = fileSystem.getRootDirectory()
 
-        puzzleInput.forEach { line ->
+        lines.forEach { line ->
             when {
                 line.startsWith("$ cd /") ->
                     currentDirectory = fileSystem.getRootDirectory()

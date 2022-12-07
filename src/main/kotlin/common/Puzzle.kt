@@ -1,14 +1,15 @@
 package common
 
 import common.util.log
+import java.io.File
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 @OptIn(ExperimentalTime::class)
-abstract class Puzzle<D1, D2>(private val day: Int, filename: String = "input") {
+abstract class Puzzle<D1, D2>(private val day: Int, filename: String = EXAMPLE) {
 
-    protected val puzzleInput = Input("inputs/day${day}/$filename.txt")
+    val lines: List<String> = File("inputs/day${day}/$filename.txt").readLines()
 
     fun solve(): PuzzleSolution {
         val solution1 = getSolution(::parse1, ::compute1)
@@ -22,17 +23,17 @@ abstract class Puzzle<D1, D2>(private val day: Int, filename: String = "input") 
         ).also { log(it) }
     }
 
-    private fun <D> getSolution(parseBlock: () -> D, computeBlock: (data: D) -> Any): PartSolution {
-        val parse = measureTimedValue(parseBlock)
+    private fun <D> getSolution(parseBlock: (lines: List<String>) -> D, computeBlock: (data: D) -> Any): PartSolution {
+        val parse = measureTimedValue { parseBlock(lines) }
         val computation = measureTimedValue { computeBlock(parse.value) }
         return PartSolution(computation.value, parse.duration, computation.duration)
     }
 
-    abstract fun parse1(): D1
+    abstract fun parse1(lines: List<String>): D1
 
     abstract fun compute1(data: D1): Any
 
-    abstract fun parse2(): D2
+    abstract fun parse2(lines: List<String>): D2
 
     abstract fun compute2(data: D2): Any
 
@@ -55,5 +56,10 @@ abstract class Puzzle<D1, D2>(private val day: Int, filename: String = "input") 
         val computeDuration: Duration,
     ) {
         val totalDuration = parseDuration + computeDuration
+    }
+
+    companion object Input {
+        const val EXAMPLE = "example"
+        const val ASSIGNMENT = "assignment"
     }
 }

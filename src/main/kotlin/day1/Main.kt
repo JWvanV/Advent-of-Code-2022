@@ -1,48 +1,31 @@
 package day1
 
-import common.Input
 import common.Puzzle
-import day1.model.Elf
-import day1.model.FoodItem
 
 fun main() {
     puzzle.solve()
 }
 
-val puzzle = object : Puzzle<List<Elf>, List<Elf>>(1, Input.ASSIGNMENT) {
+val puzzle = object : Puzzle<List<Int>, List<Int>>(1, Input.ASSIGNMENT) {
 
-    override fun parse1() = getElfs()
+    override fun parse1(lines: List<String>) = getCalories(lines)
 
-    override fun compute1(data: List<Elf>) = data.maxOf { it.totalFoodCalories() }
+    override fun compute1(data: List<Int>) = data.max()
 
-    override fun parse2() = getElfs()
+    override fun parse2(lines: List<String>) = getCalories(lines)
 
-    override fun compute2(data: List<Elf>) = data.map { it.totalFoodCalories() }.sorted().takeLast(3).sum()
+    override fun compute2(data: List<Int>) = data.sorted().takeLast(3).sum()
 
-    private fun getElfs(): List<Elf> {
-        val snacks = puzzleInput.mapEach { input ->
-            if (input.isBlank())
-                null
-            else
-                FoodItem(calories = input.toInt())
-        }
+    private fun getCalories(lines: List<String>) = buildList {
+        var elfCalories = 0
 
-        val elfs = buildList {
-            var currentElfSnacks = mutableListOf<FoodItem>()
-
-            snacks.forEach { snack ->
-                if (snack == null) {
-                    add(Elf(currentElfSnacks))
-                    currentElfSnacks = mutableListOf()
-                } else {
-                    currentElfSnacks.add(snack)
-                }
+        lines.forEach { line ->
+            if (line.isBlank()) {
+                add(elfCalories)
+                elfCalories = 0
+            } else {
+                elfCalories += line.toInt()
             }
-
-            if (currentElfSnacks.isNotEmpty())
-                add(Elf(currentElfSnacks))
         }
-
-        return elfs
     }
 }

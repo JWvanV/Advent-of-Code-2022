@@ -1,6 +1,5 @@
 package day2
 
-import common.Input
 import common.Puzzle
 import day2.model.Move
 import day2.model.Outcome
@@ -13,7 +12,7 @@ fun main() {
 
 val puzzle = object : Puzzle<List<Round1>, List<Round2>>(2, Input.ASSIGNMENT) {
 
-    override fun parse1() = puzzleInput.mapEach {
+    override fun parse1(lines: List<String>) = lines.map {
         val chars = it.toCharArray()
         Round1(
             opponentMove = Move.fromChar(chars[0]),
@@ -23,7 +22,7 @@ val puzzle = object : Puzzle<List<Round1>, List<Round2>>(2, Input.ASSIGNMENT) {
 
     override fun compute1(data: List<Round1>) = data.sumOf(::calculateScore1)
 
-    override fun parse2() = puzzleInput.mapEach {
+    override fun parse2(lines: List<String>) = lines.map {
         val chars = it.toCharArray()
         Round2(
             opponentMove = Move.fromChar(chars[0]),
