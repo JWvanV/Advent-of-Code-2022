@@ -11,36 +11,33 @@ fun main() {
     puzzle.solve()
 }
 
-val puzzle = object : Puzzle(2, Input.ASSIGNMENT) {
-    override fun part1(): Any {
-        val rounds = puzzleInput.mapEach {
-            val chars = it.toCharArray()
-            Round1(
-                opponentMove = Move.fromChar(chars[0]),
-                myMove = Move.fromChar(chars[2])
-            )
-        }
+val puzzle = object : Puzzle<List<Round1>, List<Round2>>(2, Input.ASSIGNMENT) {
 
-        return rounds.sumOf(::calculateScore)
+    override fun parse1() = puzzleInput.mapEach {
+        val chars = it.toCharArray()
+        Round1(
+            opponentMove = Move.fromChar(chars[0]),
+            myMove = Move.fromChar(chars[2])
+        )
     }
 
-    override fun part2(): Any {
-        val rounds = puzzleInput.mapEach {
-            val chars = it.toCharArray()
-            Round2(
-                opponentMove = Move.fromChar(chars[0]),
-                outcome = Outcome.fromChar(chars[2])
-            )
-        }
+    override fun compute1(data: List<Round1>) = data.sumOf(::calculateScore1)
 
-        return rounds.sumOf(::calculateScore)
+    override fun parse2() = puzzleInput.mapEach {
+        val chars = it.toCharArray()
+        Round2(
+            opponentMove = Move.fromChar(chars[0]),
+            outcome = Outcome.fromChar(chars[2])
+        )
     }
 
-    private fun calculateScore(round: Round1) = with(round) {
+    override fun compute2(data: List<Round2>) = data.sumOf(::calculateScore2)
+
+    private fun calculateScore1(round: Round1) = with(round) {
         myMove.score + getOutcome(opponentMove, myMove).score
     }
 
-    private fun calculateScore(round: Round2) = with(round) {
+    private fun calculateScore2(round: Round2) = with(round) {
         getMyMove(opponentMove, outcome).score + outcome.score
     }
 

@@ -7,9 +7,12 @@ fun main() {
     puzzle.solve()
 }
 
-val puzzle = object : Puzzle(3, Input.ASSIGNMENT) {
-    override fun part1(): Any {
-        val backpackPriorities = puzzleInput.mapEach { line ->
+val puzzle = object : Puzzle<List<String>, List<String>>(3, Input.ASSIGNMENT) {
+
+    override fun parse1() = puzzleInput.lines
+
+    override fun compute1(data: List<String>): Any {
+        val backpackPriorities = data.map { line ->
             val compartment1 = line.dropLast(line.length / 2).toCharArray()
             val compartment2 = line.drop(line.length / 2).toCharArray()
 
@@ -22,13 +25,15 @@ val puzzle = object : Puzzle(3, Input.ASSIGNMENT) {
         return backpackPriorities.sum()
     }
 
-    override fun part2(): Any {
+    override fun parse2() = puzzleInput.lines
+
+    override fun compute2(data: List<String>): Any {
         val groupItemChars = mutableListOf<Char>()
         var currentMember = 0
         var itemChars1 = emptySet<Char>()
         var itemChars2 = emptySet<Char>()
 
-        puzzleInput.forEach { line ->
+        data.forEach { line ->
             val itemChars = line.toCharArray().toSortedSet()
 
             when (currentMember) {

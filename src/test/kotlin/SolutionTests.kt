@@ -41,7 +41,7 @@ class SolutionTests {
     @Test
     fun `Day 7`() = assertPuzzleSolutions(day7.puzzle, Unit, Unit)
 
-    private fun assertPuzzleSolutions(puzzle: Puzzle, solution1: Any, solution2: Any) {
+    private fun <D1, D2> assertPuzzleSolutions(puzzle: Puzzle<D1, D2>, solution1: Any, solution2: Any) {
         with(puzzle.solve()) {
             assertThat(part1.value).isEqualTo(solution1)
             assertThat(part2.value).isEqualTo(solution2)
@@ -50,6 +50,6 @@ class SolutionTests {
     }
 
     private fun printDurationSection(solution: Puzzle.PuzzleSolution) {
-        println("| ${solution.day} | ${solution.totalDuration} | ${solution.part1.duration} | ${solution.part2.duration} |")
+        println("| ${solution.day} | ${solution.totalDuration} | ${solution.part1.parseDuration} | ${solution.part1.computeDuration} | ${solution.part2.parseDuration} | ${solution.part2.computeDuration} |")
     }
 }

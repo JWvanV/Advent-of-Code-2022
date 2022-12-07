@@ -9,16 +9,15 @@ fun main() {
     puzzle.solve()
 }
 
-val puzzle = object : Puzzle(1, Input.ASSIGNMENT) {
-    override fun part1(): Any {
-        val elfCalories = getElfs().map { it.totalFoodCalories() }
-        return elfCalories.max()
-    }
+val puzzle = object : Puzzle<List<Elf>, List<Elf>>(1, Input.ASSIGNMENT) {
 
-    override fun part2(): Any {
-        val elfCalories = getElfs().map { it.totalFoodCalories() }
-        return elfCalories.sorted().takeLast(3).sum()
-    }
+    override fun parse1() = getElfs()
+
+    override fun compute1(data: List<Elf>) = data.maxOf { it.totalFoodCalories() }
+
+    override fun parse2() = getElfs()
+
+    override fun compute2(data: List<Elf>) = data.map { it.totalFoodCalories() }.sorted().takeLast(3).sum()
 
     private fun getElfs(): List<Elf> {
         val snacks = puzzleInput.mapEach { input ->

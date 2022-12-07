@@ -3,6 +3,12 @@ package common
 import java.io.File
 
 class Input(private val filePath: String) {
+
+    val lines: List<String>
+        get() = buildList {
+            forEachLine(::add)
+        }
+
     fun forEach(forEach: (line: String) -> Unit) {
         forEachLine(forEach)
     }
@@ -11,12 +17,6 @@ class Input(private val filePath: String) {
         forEachLine { line ->
             add(map(line))
         }
-    }
-
-    fun count(predicate: (line: String) -> Boolean): Int {
-        var count = 0
-        forEachLine { if (predicate(it)) count++ }
-        return count
     }
 
     private fun forEachLine(forEach: (line: String) -> Unit) {

@@ -7,29 +7,23 @@ fun main() {
     puzzle.solve()
 }
 
-val puzzle = object : Puzzle(4, Input.ASSIGNMENT) {
-    override fun part1(): Any {
-        val rangeContainCount = puzzleInput.count { line ->
-            val elfRangeStrings = line.split(',')
-            val elfRange1 = getRange(elfRangeStrings[0])
-            val elfRange2 = getRange(elfRangeStrings[1])
+val puzzle = object : Puzzle<List<Pair<UIntRange, UIntRange>>, List<Pair<UIntRange, UIntRange>>>(4, Input.ASSIGNMENT) {
 
-            elfRange1.contains(elfRange2) || elfRange2.contains(elfRange1)
-        }
+    override fun parse1() = getRanges()
 
-        return rangeContainCount
+    override fun compute1(data: List<Pair<UIntRange, UIntRange>>) = data.count { (range1, range2) ->
+        range1.contains(range2) || range2.contains(range1)
     }
 
-    override fun part2(): Any {
-        val rangeOverlapCount = puzzleInput.count { line ->
-            val elfRangeStrings = line.split(',')
-            val elfRange1 = getRange(elfRangeStrings[0])
-            val elfRange2 = getRange(elfRangeStrings[1])
+    override fun parse2() = getRanges()
 
-            elfRange1.contains(elfRange2) || elfRange2.contains(elfRange1) || elfRange1.overlaps(elfRange2)
-        }
+    override fun compute2(data: List<Pair<UIntRange, UIntRange>>) = data.count { (range1, range2) ->
+        range1.contains(range2) || range2.contains(range1) || range1.overlaps(range2)
+    }
 
-        return rangeOverlapCount
+    private fun getRanges() = puzzleInput.mapEach { line ->
+        val elfRangeStrings = line.split(',')
+        getRange(elfRangeStrings[0]) to getRange(elfRangeStrings[1])
     }
 
     private fun getRange(rangeDescription: String) =

@@ -3,52 +3,64 @@ package day5
 import common.Input
 import common.Puzzle
 
+typealias CrateStack = ArrayDeque<Char>
+
 fun main() {
     puzzle.solve()
 }
 
-val puzzle = object : Puzzle(5, Input.ASSIGNMENT) {
-    override fun part1(): Any {
-        val (crateStacks, moveLines) = getStacksAndMoves()
+val puzzle = object :
+    Puzzle<Pair<List<CrateStack>, List<IntArray>>, Pair<List<CrateStack>, List<IntArray>>>(5, Input.ASSIGNMENT) {
 
-        moveLines.forEach { line ->
-            val numbers = line.split(" ").mapNotNull { it.toIntOrNull() }
-            repeat(numbers[0]) {
-                val crate = crateStacks[numbers[1] - 1].removeLast()
-                crateStacks[numbers[2] - 1].addLast(crate)
+    override fun parse1() = getStacksAndMoves()
+
+    override fun compute1(data: Pair<List<CrateStack>, List<IntArray>>): Any {
+        val (crateStacks, moves) = data
+
+        moves.forEach { moveNumbers ->
+            repeat(moveNumbers[0]) {
+                val crate = crateStacks[moveNumbers[1] - 1].removeLast()
+                crateStacks[moveNumbers[2] - 1].addLast(crate)
             }
         }
 
         return crateStacks.map { it.last() }.joinToString(separator = "")
     }
 
-    override fun part2(): Any {
-        val (crateStacks, moveLines) = getStacksAndMoves()
+    override fun parse2() = getStacksAndMoves()
 
-        moveLines.forEach { line ->
-            val numbers = line.split(" ").mapNotNull { it.toIntOrNull() }
-            val movedCrates = ArrayDeque<Char>()
-            repeat(numbers[0]) {
-                movedCrates.addFirst(crateStacks[numbers[1] - 1].removeLast())
+    override fun compute2(data: Pair<List<CrateStack>, List<IntArray>>): Any {
+        val (crateStacks, moves) = data
+
+        moves.forEach { moveNumbers ->
+            val movedCrates = CrateStack()
+            repeat(moveNumbers[0]) {
+                movedCrates.addFirst(crateStacks[moveNumbers[1] - 1].removeLast())
             }
             movedCrates.forEach {
-                crateStacks[numbers[2] - 1].addLast(it)
+                crateStacks[moveNumbers[2] - 1].addLast(it)
             }
         }
 
         return crateStacks.map { it.last() }.joinToString(separator = "")
     }
 
-    private fun getStacksAndMoves(): Pair<List<ArrayDeque<Char>>, List<String>> {
+    private fun getStacksAndMoves(): Pair<List<CrateStack>, List<IntArray>> {
         var numStacks = 0
         val crateLines = mutableListOf<String>()
-        val moveLines = mutableListOf<String>()
+        val moveLines = mutableListOf<IntArray>()
 
         puzzleInput.forEach { line ->
             when {
-                line.isBlank() -> Unit
-                line.startsWith(" 1") -> numStacks = line.trim().split(" ").last().toInt()
-                line.startsWith("move") -> moveLines.add(line)
+                line.isBlank() ->
+                    Unit
+
+                line.startsWith(" 1") ->
+                    numStacks = line.trim().split(" ").last().toInt()
+
+                line.startsWith("move") ->
+                    moveLines.add(line.split(" ").mapNotNull { it.toIntOrNull() }.toIntArray())
+
                 else -> crateLines.add(line)
             }
         }
@@ -57,9 +69,9 @@ val puzzle = object : Puzzle(5, Input.ASSIGNMENT) {
         return Pair(crateStacks, moveLines)
     }
 
-    private fun getCrateStacks(numStacks: Int, crateLines: List<String>): List<ArrayDeque<Char>> {
+    private fun getCrateStacks(numStacks: Int, crateLines: List<String>): List<CrateStack> {
         val crateStacks = buildList {
-            repeat(numStacks) { add(ArrayDeque<Char>()) }
+            repeat(numStacks) { add(CrateStack()) }
         }
 
         crateLines.forEach { line ->
