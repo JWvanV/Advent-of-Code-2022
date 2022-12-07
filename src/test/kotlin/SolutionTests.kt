@@ -51,10 +51,19 @@ class SolutionTests {
         }
     }
 
-    private fun printDurationSection(solution: Puzzle.PuzzleSolution) {
-        println("| ${solution.day} | ${solution.totalDuration} | ${solution.part1.parseDuration} | ${solution.part1.computeDuration} | ${solution.part2.parseDuration} | ${solution.part2.computeDuration} |")
-//        println("| ${solution.day} | ${solution.totalDuration.ms()} | ${solution.part1.parseDuration.ms()} | ${solution.part1.computeDuration.ms()} | ${solution.part2.parseDuration.ms()} | ${solution.part2.computeDuration.ms()} |")
+    private fun printDurationSection(solution: Puzzle.PuzzleSolution, reportUnit: DurationUnit? = null) {
+        println(
+            "| ${solution.day} " +
+                    "| ${solution.totalDuration.format(reportUnit)} " +
+                    "| ${solution.part1.parseDuration.format(reportUnit)} " +
+                    "| ${solution.part1.computeDuration.format(reportUnit)} " +
+                    "| ${solution.part2.parseDuration.format(reportUnit)} " +
+                    "| ${solution.part2.computeDuration.format(reportUnit)} |"
+        )
     }
 
-    private fun Duration.ms() = this.toString(DurationUnit.MILLISECONDS, decimals = 2)
+    private fun Duration.format(reportUnit: DurationUnit?) = when (reportUnit) {
+        null -> toString()
+        else -> toString(reportUnit, decimals = 2)
+    }
 }
