@@ -1,6 +1,7 @@
 package day5
 
-import common.Puzzle
+import common.model.Input
+import common.model.Puzzle
 
 typealias CrateStack = ArrayDeque<Char>
 

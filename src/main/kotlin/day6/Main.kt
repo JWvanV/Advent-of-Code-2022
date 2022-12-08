@@ -1,6 +1,7 @@
 package day6
 
-import common.Puzzle
+import common.model.Input
+import common.model.Puzzle
 import kotlin.math.max
 
 fun main() {

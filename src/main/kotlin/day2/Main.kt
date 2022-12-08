@@ -1,6 +1,7 @@
 package day2
 
-import common.Puzzle
+import common.model.Input
+import common.model.Puzzle
 import day2.model.Move
 import day2.model.Outcome
 import day2.model.Round1

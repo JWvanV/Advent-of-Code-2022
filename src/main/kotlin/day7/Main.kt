@@ -1,6 +1,7 @@
 package day7
 
-import common.Puzzle
+import common.model.Input
+import common.model.Puzzle
 import day7.model.FileSystem
 import day7.model.Node
 import java.math.BigInteger

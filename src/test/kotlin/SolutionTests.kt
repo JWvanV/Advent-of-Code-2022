@@ -1,5 +1,6 @@
 import com.google.common.truth.Truth.assertThat
-import common.Puzzle
+import common.model.Puzzle
+import common.model.PuzzleSolution
 import common.util.loggingEnabled
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -44,7 +45,10 @@ class SolutionTests {
     fun `Day 7`() = assertPuzzleSolutions(day7.puzzle, 1325919, 2050735)
 
     @Test
-    fun `Day 8`() = assertPuzzleSolutions(day8.puzzle, Unit, Unit)
+    fun `Day 8`() = assertPuzzleSolutions(day8.puzzle, 1733, 284648)
+
+    @Test
+    fun `Day 9`() = assertPuzzleSolutions(day9.puzzle, Unit, Unit)
 
     private fun <D1, D2> assertPuzzleSolutions(puzzle: Puzzle<D1, D2>, solution1: Any, solution2: Any) {
         with(puzzle.solve()) {
@@ -54,7 +58,7 @@ class SolutionTests {
         }
     }
 
-    private fun printDurationSection(solution: Puzzle.PuzzleSolution, reportUnit: DurationUnit? = null) {
+    private fun printDurationSection(solution: PuzzleSolution, reportUnit: DurationUnit? = null) {
         println(
             "| ${solution.day} " +
                     "| ${solution.totalDuration.format(reportUnit)} " +

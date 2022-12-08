@@ -1,6 +1,7 @@
 package day3
 
-import common.Puzzle
+import common.model.Input
+import common.model.Puzzle
 
 fun main() {
     puzzle.solve()

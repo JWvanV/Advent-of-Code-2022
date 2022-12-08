@@ -1,13 +1,13 @@
-package template
+package day9
 
 import common.model.Input
 import common.model.Puzzle
 
 fun main() {
-    day9.puzzle.solve()
+    puzzle.solve()
 }
 
-val puzzle = object : Puzzle<Any, Any>(0, Input.EXAMPLE) {
+val puzzle = object : Puzzle<Any, Any>(9, Input.EXAMPLE) {
 
     override fun parse1(lines: List<String>) = lines
 
