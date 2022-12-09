@@ -16,6 +16,7 @@ class SolutionTests {
     fun setup() {
         // Set to true if you want to get the durations for each puzzle
         loggingEnabled = false
+        System.gc()
     }
 
     @AfterTest
