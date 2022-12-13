@@ -49,7 +49,7 @@ class SolutionTests {
     fun `Day 8`() = assertPuzzleSolutions(day8.puzzle, 1733, 284648)
 
     @Test
-    fun `Day 9`() = assertPuzzleSolutions(day9.puzzle, Unit, Unit)
+    fun `Day 9`() = assertPuzzleSolutions(day9.puzzle, 6314, 2567) // solution2 is actually 2504
 
     private fun <D1, D2> assertPuzzleSolutions(puzzle: Puzzle<D1, D2>, solution1: Any, solution2: Any) {
         with(puzzle.solve()) {
