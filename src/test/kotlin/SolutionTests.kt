@@ -51,17 +51,8 @@ class SolutionTests {
     @Test
     fun `Day 9`() = assertPuzzleSolutions(day9.puzzle, 6314, 2504)
 
-    private val EJCFPGLH = """
-        ####...##..##..####.###...##..#....#..#.
-        #.......#.#..#.#....#..#.#..#.#....#..#.
-        ###.....#.#....###..#..#.#....#....####.
-        #.......#.#....#....###..#.##.#....#..#.
-        #....#..#.#..#.#....#....#..#.#....#..#.
-        ####..##...##..#....#.....###.####.#..#.
-    """.trimIndent()
-
     @Test
-    fun `Day 10`() = assertPuzzleSolutions(day10.puzzle, 11960, EJCFPGLH)
+    fun `Day 10`() = assertPuzzleSolutions(day10.puzzle, 11960, "EJCFPGLH")
 
     @Test
     fun `Day 11`() = assertPuzzleSolutions(day11.puzzle, Unit, Unit)

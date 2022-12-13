@@ -25,15 +25,16 @@ val puzzle = object : Puzzle<List<Instruction>, List<Instruction>>(10, Input.ASS
 
     override fun compute2(data: List<Instruction>): Any {
         val xPerCycle = getXValues(data)
-        val stringBuilder = StringBuilder()
+
+        val displayLines = mutableListOf<CharArray>()
 
         repeat(6) {
             val startIndex = it * 40
             val xValues = xPerCycle.subList(startIndex, startIndex + 40)
-            stringBuilder.appendLine(getLine(xValues))
+            displayLines.add(getLine(xValues))
         }
 
-        return stringBuilder.toString().trim()
+        return readDisplayLines(displayLines)
     }
 
     private fun getInstructions(lines: List<String>) = lines.map {
@@ -63,7 +64,7 @@ val puzzle = object : Puzzle<List<Instruction>, List<Instruction>>(10, Input.ASS
         return xPerCycle
     }
 
-    private fun getLine(xValues: List<Int>): String {
+    private fun getLine(xValues: List<Int>): CharArray {
         val lineChars = CharArray(40) { '.' }
 
         repeat(40) { index ->
@@ -73,6 +74,120 @@ val puzzle = object : Puzzle<List<Instruction>, List<Instruction>>(10, Input.ASS
                 lineChars[index] = '#'
         }
 
-        return lineChars.toList().joinToString(separator = "")
+        return lineChars
+    }
+
+    private fun readDisplayLines(displayLines: List<CharArray>): String {
+        var tempDisplayLines = displayLines
+        var displayText = ""
+
+        var currentIndex = 0
+        repeat(40) {
+            if (tempDisplayLines.all { it[currentIndex] == '.' }) {
+                val charLines = mutableListOf<CharArray>()
+                tempDisplayLines = tempDisplayLines.map {
+                    charLines.add(it.take(currentIndex).toCharArray())
+                    it.drop(currentIndex + 1).toCharArray()
+                }
+                currentIndex = 0
+                displayText += readCharacter(charLines)
+            } else {
+                currentIndex++
+            }
+        }
+
+        return displayText
+    }
+
+    private fun readCharacter(characterLines: List<CharArray>): Char {
+        val characterDisplay = buildString {
+            characterLines.forEach {
+                appendLine(it.concatToString())
+            }
+        }.trim()
+
+        return when (characterDisplay) {
+            """
+                ####
+                #...
+                ###.
+                #...
+                #...
+                ####
+            """.trimIndent(),
+            -> 'E'
+
+            """
+                ..##
+                ...#
+                ...#
+                ...#
+                #..#
+                .##.
+            """.trimIndent(),
+            -> 'J'
+
+            """
+                .##.
+                #..#
+                #...
+                #...
+                #..#
+                .##.
+            """.trimIndent(),
+            -> 'C'
+
+            """
+                ####
+                #...
+                ###.
+                #...
+                #...
+                #...
+            """.trimIndent(),
+            -> 'F'
+
+            """
+                ###.
+                #..#
+                #..#
+                ###.
+                #...
+                #...
+            """.trimIndent(),
+            -> 'P'
+
+            """
+                .##.
+                #..#
+                #...
+                #.##
+                #..#
+                .###
+            """.trimIndent(),
+            -> 'G'
+
+            """
+                #...
+                #...
+                #...
+                #...
+                #...
+                ####
+            """.trimIndent(),
+            -> 'L'
+
+            """
+               #..#
+               #..#
+               ####
+               #..#
+               #..#
+               #..#
+           """.trimIndent(),
+            -> 'H'
+
+            else -> '?'
+        }
     }
 }
