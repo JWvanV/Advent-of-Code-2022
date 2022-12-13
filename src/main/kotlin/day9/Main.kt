@@ -52,15 +52,10 @@ val puzzle = object : Puzzle<List<Move>, List<Move>>(9, Input.ASSIGNMENT) {
                 val tailDistanceX = abs(dx)
                 val tailDistanceY = abs(dy)
 
-                if (tailDistanceX > 1) {
+                if (tailDistanceX > 1 || tailDistanceY > 1) {
                     child.position.x += signX
-                    child.position.y = parent.position.y
-                } else if (tailDistanceY > 1) {
-                    child.position.x = parent.position.x
                     child.position.y += signY
                 }
-
-                log("- Moving child to ${child.position}")
 
                 moveChild(child)
             }
