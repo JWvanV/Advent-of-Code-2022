@@ -51,7 +51,7 @@ class SolutionTests {
     @Test
     fun `Day 9`() = assertPuzzleSolutions(day9.puzzle, 6314, 2504)
 
-    private val expectedDay10Solution2 = """
+    private val EJCFPGLH = """
         ####...##..##..####.###...##..#....#..#.
         #.......#.#..#.#....#..#.#..#.#....#..#.
         ###.....#.#....###..#..#.#....#....####.
@@ -61,7 +61,7 @@ class SolutionTests {
     """.trimIndent()
 
     @Test
-    fun `Day 10`() = assertPuzzleSolutions(day10.puzzle, 11960, expectedDay10Solution2) // solution 2 is EJCFPGLH
+    fun `Day 10`() = assertPuzzleSolutions(day10.puzzle, 11960, EJCFPGLH)
 
     private fun <D1, D2> assertPuzzleSolutions(puzzle: Puzzle<D1, D2>, solution1: Any, solution2: Any) {
         with(puzzle.solve()) {
